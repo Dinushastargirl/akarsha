@@ -40,8 +40,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String tenantId = jwtService.extractTenantId(jwt);
             String role = jwtService.extractRole(jwt);
 
-            // Set trusted tenant ID on the TenantContext for the current thread
-            TenantContext.setCurrentTenant(tenantId);
+            // For SUPER_ADMIN, we bypass the tenant filter for platform-wide access
+            if ("SUPER_ADMIN".equals(role) || "ROLE_SUPER_ADMIN".equals(role)) {
+                TenantContext.setCurrentTenant("SYSTEM_BYPASS");
+            } else {
+                TenantContext.setCurrentTenant(tenantId);
+            }
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
                 // Roles in Spring Security should be prefixed with "ROLE_"

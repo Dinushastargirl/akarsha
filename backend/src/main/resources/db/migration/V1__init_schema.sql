@@ -30,7 +30,7 @@ INSERT INTO salons (name, subdomain) VALUES
 -- Seed Initial Users (Password: password123, BCrypt hash: $2a$10$dYIvd0JOu5bdNi/AhIS2BuFUQll5iToGNNtModCXTXn26s/8yskme)
 -- Hash generated using standard BCrypt
 INSERT INTO users (tenant_id, username, email, password_hash, role) VALUES
-('platform-system', 'platform_admin', 'admin@akarsha.com', '$2a$10$dYIvd0JOu5bdNi/AhIS2BuFUQll5iToGNNtModCXTXn26s/8yskme', 'PLATFORM_ADMIN'),
+('platform-system', 'platform_admin', 'admin@akarsha.com', '$2a$10$dYIvd0JOu5bdNi/AhIS2BuFUQll5iToGNNtModCXTXn26s/8yskme', 'SUPER_ADMIN'),
 ('alpha', 'alpha_owner', 'owner@alpha.com', '$2a$10$dYIvd0JOu5bdNi/AhIS2BuFUQll5iToGNNtModCXTXn26s/8yskme', 'SALON_OWNER'),
 ('alpha', 'alpha_manager', 'manager@alpha.com', '$2a$10$dYIvd0JOu5bdNi/AhIS2BuFUQll5iToGNNtModCXTXn26s/8yskme', 'MANAGER'),
 ('alpha', 'alpha_receptionist', 'receptionist@alpha.com', '$2a$10$dYIvd0JOu5bdNi/AhIS2BuFUQll5iToGNNtModCXTXn26s/8yskme', 'RECEPTIONIST'),

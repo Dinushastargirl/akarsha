@@ -17,8 +17,10 @@ import { SettingsPage } from './pages/SettingsPage';
 import type { SalonData } from './types';
 import { ReportsPage } from './pages/ReportsPage';
 import { ConversationsPage } from './pages/ConversationsPage';
+import { PlatformDashboardPage } from './pages/platform/PlatformDashboardPage';
+import { PlatformSalonsPage } from './pages/platform/PlatformSalonsPage';
 
-type ScreenState = 'LOGIN' | 'SIGNUP' | 'CREATE_SALON' | 'SETUP_WIZARD' | 'DASHBOARD' | 'CUSTOMERS' | 'APPOINTMENTS' | 'STAFF' | 'SERVICES' | 'SETTINGS' | 'REPORTS' | 'CONVERSATIONS';
+type ScreenState = 'LOGIN' | 'SIGNUP' | 'CREATE_SALON' | 'SETUP_WIZARD' | 'DASHBOARD' | 'CUSTOMERS' | 'APPOINTMENTS' | 'STAFF' | 'SERVICES' | 'SETTINGS' | 'REPORTS' | 'CONVERSATIONS' | 'PLATFORM_DASHBOARD' | 'PLATFORM_SALONS';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -44,10 +46,15 @@ function App() {
       const payload = JSON.parse(atob(token.split('.')[1]));
       setUserEmail(payload.sub || '');
       setUserRole(payload.role || '');
-      if (!payload.tenantId) {
+      if (!payload.tenantId && payload.role === 'SUPER_ADMIN') {
+        if (screen === 'LOGIN' || screen === 'SIGNUP') {
+          setScreen('PLATFORM_DASHBOARD');
+        }
+      } else if (!payload.tenantId) {
         setScreen('CREATE_SALON');
       } else {
         setSalon(prev => ({ ...prev, subdomain: payload.tenantId }));
+        // If they just logged in, default to their dashboard
         if (screen === 'LOGIN' || screen === 'SIGNUP') {
           setScreen('DASHBOARD');
         }
@@ -81,6 +88,23 @@ function App() {
         <div className="flex items-center space-x-4 lg:space-x-8">
           <img src={akarshaLogoDark} alt="Akarsha" className="h-8 hidden sm:block" />
           <img src={akarshaMark} alt="Akarsha" className="h-8 sm:hidden bg-brand-800 rounded-md p-1" />
+          {token && ['PLATFORM_DASHBOARD', 'PLATFORM_SALONS'].includes(screen) && (
+            <nav className="hidden sm:flex space-x-3 lg:space-x-6 pl-4 border-l border-neutral-200 overflow-x-auto">
+              <button 
+                onClick={() => { setScreen('PLATFORM_DASHBOARD'); setError(null); }}
+                className={`text-sm font-medium transition-colors py-1 ${screen === 'PLATFORM_DASHBOARD' ? 'text-brand-800 border-b-2 border-brand-800' : 'text-neutral-500 hover:text-neutral-800'}`}
+              >
+                Platform Overview
+              </button>
+              <button 
+                onClick={() => { setScreen('PLATFORM_SALONS'); setError(null); }}
+                className={`text-sm font-medium transition-colors py-1 ${screen === 'PLATFORM_SALONS' ? 'text-brand-800 border-b-2 border-brand-800' : 'text-neutral-500 hover:text-neutral-800'}`}
+              >
+                Salons Management
+              </button>
+            </nav>
+          )}
+
           {token && ['DASHBOARD', 'CUSTOMERS', 'APPOINTMENTS', 'STAFF', 'SERVICES'].includes(screen) && (
             <nav className="hidden sm:flex space-x-3 lg:space-x-6 pl-4 border-l border-neutral-200 overflow-x-auto">
               <button 
@@ -288,6 +312,22 @@ function App() {
         {screen === 'CONVERSATIONS' && (
           userRole !== 'STAFF' ? (
             <ConversationsPage />
+          ) : (
+            <div className="flex justify-center py-20 text-neutral-500">Access Denied</div>
+          )
+        )}
+
+        {screen === 'PLATFORM_DASHBOARD' && (
+          userRole === 'SUPER_ADMIN' || userRole === 'ROLE_SUPER_ADMIN' ? (
+            <PlatformDashboardPage onError={handleError} />
+          ) : (
+            <div className="flex justify-center py-20 text-neutral-500">Access Denied</div>
+          )
+        )}
+
+        {screen === 'PLATFORM_SALONS' && (
+          userRole === 'SUPER_ADMIN' || userRole === 'ROLE_SUPER_ADMIN' ? (
+            <PlatformSalonsPage onError={handleError} />
           ) : (
             <div className="flex justify-center py-20 text-neutral-500">Access Denied</div>
           )

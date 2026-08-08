@@ -41,4 +41,7 @@ public class Salon extends BaseEntity {
 
     @Column(name = "setup_completed")
     private boolean setupCompleted = false;
+
+    @Column(nullable = false)
+    private String status = "ACTIVE";
 }
