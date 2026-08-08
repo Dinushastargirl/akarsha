@@ -8,9 +8,9 @@ spring:
     name: akarsha-backend
   
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://localhost:5435/akarsha}
-    username: ${DATABASE_USERNAME:postgres}
-    password: ${DATABASE_PASSWORD:postgres}
+    url: jdbc:postgresql://${PGHOST:localhost}:${PGPORT:5435}/${PGDATABASE:akarsha}
+    username: ${PGUSER:postgres}
+    password: ${PGPASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
   
   jpa:
