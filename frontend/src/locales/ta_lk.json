@@ -8,7 +8,6 @@
   "tenantNameLabel": "Salon Name",
   "salonAlert": "Unga data secure-aaga irukkum.",
   "changeTenant": "Salon-ai maatravum",
-  
   "loginTitle": "Unga salon-ukku login pannunga",
   "loginSubtitle": "Login seiya email matrum password podunga",
   "email": "Email Address",
@@ -20,7 +19,6 @@
   "allFieldsRequired": "Yella fields-um required",
   "passwordMismatch": "Password match aagavillai",
   "subdomainTaken": "Indha web address yerkanavey use-il ulladhu",
-  
   "signupTitle": "Pudhu Account create pannunga",
   "signupSubtitle": "Salon setup seiya owner account register pannunga",
   "fullName": "Name",
@@ -28,7 +26,6 @@
   "signupBtn": "Create Account",
   "alreadyHaveAccount": "Yerkanavey register seithullirhala?",
   "loginLink": "Inga login seiga",
-  
   "createSalonTitle": "Salon profile-ai uruvakkunga",
   "createSalonSubtitle": "Unga business pathi solli address setup pannunga",
   "salonName": "Salon Name",
@@ -44,7 +41,6 @@
   "nailStudio": "Nail Studio",
   "other": "Vera type",
   "createSalonBtn": "Setup-ukku thodangavum",
-  
   "setupTitle": "Salon-ai setup seiga",
   "setupSubtitle": "Operational details-ai configure seiyyavum",
   "step1": "Vela Nera Vivaram",
@@ -62,15 +58,13 @@
   "prevBtn": "Pinnal",
   "skipBtn": "Indha padi thavirka",
   "finishBtn": "Setup Mudikavum",
-  
   "dashTitle": "Dashboard",
-  "dashSubtitle": "Welcome to your salon dashboard",
+  "dashSubtitle": "Ungal salon dashboard-ku vanga",
   "setupSuccess": "Unga Salon ready.",
   "setupSuccessBody": "Unga workspace create aagiduchu. Ippo unga services matrum staff-ai manage pannunga.",
   "setupSuccessAction": "Dashboard-ukku pogavum",
   "setupPending": "Unga features access seiya setup-ai mudikkavum.",
   "logoutBtn": "Sign Out seiga",
-
   "navCustomers": "Customers",
   "navDashboard": "Dashboard",
   "customersTitle": "Customers",
@@ -100,7 +94,6 @@
   "totalSpent": "மொத்த செலவு",
   "lastVisit": "கடைசி வருகை",
   "neverVisited": "வந்ததில்லை",
-
   "navAppointments": "Appointments",
   "appointmentsTitle": "Appointments",
   "appointmentsSubtitle": "Inraiya bookings matrum calendar-ai manage pannunga.",
@@ -141,7 +134,6 @@
   "noStaff": "Staff members yarum illai.",
   "noStaffDesc": "Bookings matrum schedule manage panna staff-ai add pannunga.",
   "saveStaff": "Staff member save seiga",
-
   "navServices": "Services",
   "servicesTitle": "Services & Pricing",
   "servicesSubtitle": "Salon-la irukira services mattrum rates manage pannunga.",
@@ -176,9 +168,6 @@
   "invalidPrice": "Correct vilai podungo (zero vazhiyum jaasthi).",
   "invalidDuration": "Duration zero vazhiyum jaasthi irukanum.",
   "serviceNamePlaceholder": "E.g. Hair Cut, Facial, Manicure",
-
-  "dashTitle": "Dashboard",
-  "dashSubtitle": "Ungal salon dashboard-ku vanga",
   "dashRefresh": "Refresh pannunga",
   "dashLoadFailed": "Dashboard load aagala. Maarupadiyum try pannunga.",
   "retryBtn": "Maarupadiyum try pannunga",
@@ -208,7 +197,6 @@
   "statusCOMPLETED": "Mudinjuchu",
   "statusCANCELLED": "ரத்து செய்யப்பட்டது",
   "statusNO_SHOW": "வரவில்லை",
-
   "navSettings": "அமைப்புகள்",
   "settingsTitle": "நிலைய அமைப்புகள்",
   "settingsSubtitle": "உங்கள் வணிக அமைப்புகளை நிர்வகிக்கவும்.",
@@ -220,5 +208,19 @@
   "settingsUpdated": "அமைப்புகள் வெற்றிகரமாக புதுப்பிக்கப்பட்டன.",
   "settingsFetchFailed": "அமைப்புகளை ஏற்ற முடியவில்லை.",
   "settingsUpdateFailed": "அமைப்புகளை புதுப்பிக்க முடியவில்லை.",
-  "subdomainReadonly": "உங்கள் இணைய முகவரியை மாற்ற முடியாது."
+  "subdomainReadonly": "உங்கள் இணைய முகவரியை மாற்ற முடியாது.",
+  "chat": {
+    "title": "அரட்டை",
+    "send": "அனுப்பு",
+    "book_appointment": "நேரம் ஒதுக்கு",
+    "reschedule": "மாற்று",
+    "cancel": "ரத்து செய்",
+    "talk_to_staff": "பணியாளரிடம் பேசு",
+    "language": "மொழி",
+    "available_times": "கிடைக்கும் நேரங்கள்",
+    "appointment_confirmed": "நேரம் உறுதி செய்யப்பட்டது",
+    "appointment_cancelled": "நேரம் ரத்து செய்யப்பட்டது",
+    "appointment_rescheduled": "நேரம் மாற்றப்பட்டது",
+    "human_support": "பணியாளர் உதவி"
+  }
 }

@@ -8,7 +8,6 @@
   "tenantNameLabel": "Salon Name",
   "salonAlert": "Your salon database is private and isolated to your account.",
   "changeTenant": "Switch Salon View",
-  
   "loginTitle": "Sign in to your salon",
   "loginSubtitle": "Enter your email and password to access your dashboard",
   "email": "Email Address",
@@ -20,7 +19,6 @@
   "allFieldsRequired": "All fields are required",
   "passwordMismatch": "Passwords do not match",
   "subdomainTaken": "This salon web address is already taken",
-  
   "signupTitle": "Create Owner Account",
   "signupSubtitle": "Register your admin account to begin setting up your salon",
   "fullName": "Full Name",
@@ -28,7 +26,6 @@
   "signupBtn": "Create Account",
   "alreadyHaveAccount": "Already registered?",
   "loginLink": "Sign in here",
-  
   "createSalonTitle": "Create your salon profile",
   "createSalonSubtitle": "Tell us about your business to set up your salon address",
   "salonName": "Salon Name",
@@ -44,7 +41,6 @@
   "nailStudio": "Nail Studio",
   "other": "Other",
   "createSalonBtn": "Continue to Setup",
-  
   "setupTitle": "Set up your salon",
   "setupSubtitle": "Configure operational details to get your workspace ready",
   "step1": "Operational Hours",
@@ -56,13 +52,12 @@
   "serviceName": "Service Name",
   "servicePrice": "Price (LKR)",
   "serviceDuration": "Duration (minutes)",
-  "staffName": "Staff Member Name",
+  "staffName": "Staff Name",
   "staffEmail": "Staff Email Address",
   "nextBtn": "Next Step",
   "prevBtn": "Back",
   "skipBtn": "Skip this step",
   "finishBtn": "Complete Setup",
-  
   "dashTitle": "Dashboard",
   "dashSubtitle": "Welcome to your salon dashboard",
   "setupSuccess": "Your salon is ready.",
@@ -70,7 +65,6 @@
   "setupSuccessAction": "Go to Salon Dashboard",
   "setupPending": "Finish setting up your salon to access full features.",
   "logoutBtn": "Sign Out",
-
   "navCustomers": "Customers",
   "navDashboard": "Dashboard",
   "customersTitle": "Customers",
@@ -100,7 +94,6 @@
   "totalSpent": "Total Spent",
   "lastVisit": "Last Visit",
   "neverVisited": "Never visited",
-
   "navAppointments": "Appointments",
   "appointmentsTitle": "Appointments",
   "appointmentsSubtitle": "Manage daily bookings and schedule clients.",
@@ -141,7 +134,6 @@
   "noStaff": "No staff members registered.",
   "noStaffDesc": "Register your team members to manage bookings and schedules.",
   "saveStaff": "Save Staff Member",
-
   "navServices": "Services",
   "servicesTitle": "Services & Pricing",
   "servicesSubtitle": "Manage the services your salon offers and their pricing.",
@@ -176,9 +168,6 @@
   "invalidPrice": "Enter a valid price (zero or greater).",
   "invalidDuration": "Duration must be greater than zero.",
   "serviceNamePlaceholder": "e.g. Hair Cut, Facial, Manicure",
-
-  "dashTitle": "Dashboard",
-  "dashSubtitle": "Welcome to your salon dashboard",
   "dashRefresh": "Refresh",
   "dashLoadFailed": "Could not load dashboard. Please try again.",
   "retryBtn": "Try again",
@@ -208,7 +197,6 @@
   "statusCOMPLETED": "Completed",
   "statusCANCELLED": "Cancelled",
   "statusNO_SHOW": "No-show",
-
   "navSettings": "Settings",
   "settingsTitle": "Salon Settings",
   "settingsSubtitle": "Manage your salon's business configuration.",
@@ -221,7 +209,6 @@
   "settingsFetchFailed": "Failed to load settings.",
   "settingsUpdateFailed": "Failed to update settings.",
   "subdomainReadonly": "Your salon's web address is permanent and cannot be changed.",
-
   "navReports": "Reports",
   "reportsTitle": "Reports & Analytics",
   "dateRange": "Date Range",
@@ -240,14 +227,26 @@
   "revenueOverTime": "Revenue Over Time",
   "servicePerformance": "Service Performance",
   "staffPerformance": "Staff Performance",
-  "serviceName": "Service Name",
   "cancelledAppts": "Cancelled",
-  "staffName": "Staff Name",
   "completionRate": "Completion Rate",
   "revenueGenerated": "Revenue Generated",
   "totalCustomers": "Total Customers",
   "repeatVisitRate": "Repeat Visit Rate",
   "topNoShowServices": "Top Services by No-shows",
   "noShowCount": "No-shows",
-  "errorFetchingReports": "Failed to load reports."
+  "errorFetchingReports": "Failed to load reports.",
+  "chat": {
+    "title": "Chat",
+    "send": "Send",
+    "book_appointment": "Book appointment",
+    "reschedule": "Reschedule",
+    "cancel": "Cancel",
+    "talk_to_staff": "Talk to staff",
+    "language": "Language",
+    "available_times": "Available times",
+    "appointment_confirmed": "Appointment confirmed",
+    "appointment_cancelled": "Appointment cancelled",
+    "appointment_rescheduled": "Appointment rescheduled",
+    "human_support": "Human support"
+  }
 }

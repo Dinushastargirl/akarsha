@@ -21,6 +21,16 @@ Akarsha is a modern, premium, multi-tenant Software as a Service (SaaS) platform
 - Conflict-Aware Appointment Booking
 - Billing, Checkout & Invoicing
 - Localized Financial Reports & Analytics
+- Customer Engagement & AI Assistant (Web Chat & WhatsApp)
+
+## Configuration
+The following environment variables can be configured:
+
+- `AKARSHA_WHATSAPP_TOKEN`: WhatsApp Webhook Verification Token (Default: `akarsha_verify_123`)
+- `AKARSHA_WHATSAPP_SECRET`: Meta App Secret for Signature Validation (Default: `dummy_secret`)
+- `AKARSHA_WHATSAPP_PHONE_ID`: Meta Phone Number ID (Default: `test_phone_id`)
+- `AKARSHA_WHATSAPP_ACCESS_TOKEN`: Meta Graph API Access Token (Default: `test_access_token`)
+- `AKARSHA_AI_PROVIDER`: The AI provider to use (`mock`, `openai`, `anthropic`). (Default: `mock`)
 
 ## Running the Application (Production)
 

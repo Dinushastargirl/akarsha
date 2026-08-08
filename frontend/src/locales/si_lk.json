@@ -8,7 +8,6 @@
   "tenantNameLabel": "Salon Name eka",
   "salonAlert": "Oyaage data safe saha secure.",
   "changeTenant": "Salon eka maru karanna",
-  
   "loginTitle": "Oyaage salon ekata login wenna",
   "loginSubtitle": "Email eka saha password eka athulath karanna",
   "email": "Email Address eka",
@@ -20,7 +19,6 @@
   "allFieldsRequired": "Hama field ekakma fill karanna",
   "passwordMismatch": "Passwords match wenne natha",
   "subdomainTaken": "Mei web address eka ganna baha, wena ekak danna",
-  
   "signupTitle": "Owner Account eka Create karanna",
   "signupSubtitle": "Owner account eka register karala weda patan gamu",
   "fullName": "Name eka",
@@ -28,7 +26,6 @@
   "signupBtn": "Create Account",
   "alreadyHaveAccount": "Register welaada inne?",
   "loginLink": "Methanin sign in wenna",
-  
   "createSalonTitle": "Salon profile eka hadhaganna",
   "createSalonSubtitle": "Oyaage salon eka gana wisthara dhenna",
   "salonName": "Salon Name eka",
@@ -44,7 +41,6 @@
   "nailStudio": "Nail Studio",
   "other": "Wena ekak",
   "createSalonBtn": "Setup ekata yanna",
-  
   "setupTitle": "Salon setup karamu",
   "setupSubtitle": "Setup steps iwara karala patan gamu",
   "step1": "Operational Hours",
@@ -62,15 +58,13 @@
   "prevBtn": "Back",
   "skipBtn": "Meka skip karanna",
   "finishBtn": "Setup eka iwarai",
-  
   "dashTitle": "Dashboard",
-  "dashSubtitle": "Welcome to your salon dashboard",
+  "dashSubtitle": "Oyaage salon dashboard ekata ayubowan",
   "setupSuccess": "Oyaage Salon eka ready.",
   "setupSuccessBody": "Oyaage workspace eka create kalaa. Dan oyata services saha team eka kalamanakarana karanna puluwan.",
   "setupSuccessAction": "Salon Dashboard ekata yanna",
   "setupPending": "Weda patan ganna salon setup eka iwara karanna.",
   "logoutBtn": "Sign Out wenna",
-
   "navCustomers": "Customers",
   "navDashboard": "Dashboard",
   "customersTitle": "Customers",
@@ -100,7 +94,6 @@
   "totalSpent": "මුළු මුදල",
   "lastVisit": "අවසන් පැමිණීම",
   "neverVisited": "පැමිණ නැත",
-
   "navAppointments": "Appointments",
   "appointmentsTitle": "Appointments",
   "appointmentsSubtitle": "Ada bookings saha calendar eka manage karanna.",
@@ -141,7 +134,6 @@
   "noStaff": "Thama staff members la natha.",
   "noStaffDesc": "Bookings saha schedules kalamanakarana karanna staff ekathu karamu.",
   "saveStaff": "Staff member save karanna",
-
   "navServices": "Services",
   "servicesTitle": "Services & Pricing",
   "servicesSubtitle": "Salon eke services haa rates manage karanna.",
@@ -176,9 +168,6 @@
   "invalidPrice": "Sathyuta rate ekak daanna (zero wata wada wena).",
   "invalidDuration": "Duration zero wata wada ona.",
   "serviceNamePlaceholder": "E.g. Hair Cut, Facial, Manicure",
-
-  "dashTitle": "Dashboard",
-  "dashSubtitle": "Oyaage salon dashboard ekata ayubowan",
   "dashRefresh": "Refresh karanna",
   "dashLoadFailed": "Dashboard load wenne naha. Anith warak try karanna.",
   "retryBtn": "Anith warak try karanna",
@@ -208,7 +197,6 @@
   "statusCOMPLETED": "Wewa Giya",
   "statusCANCELLED": "අවලංගුයි",
   "statusNO_SHOW": "පැමිණියේ නැත",
-
   "navSettings": "සැකසුම්",
   "settingsTitle": "සැලෝන් සැකසුම්",
   "settingsSubtitle": "ඔබගේ ව්‍යාපාරයේ දත්ත කළමනාකරණය කරන්න.",
@@ -220,5 +208,19 @@
   "settingsUpdated": "සැකසුම් සාර්ථකව යාවත්කාලීන විය.",
   "settingsFetchFailed": "සැකසුම් ලබාගැනීම අසාර්ථකයි.",
   "settingsUpdateFailed": "සැකසුම් යාවත්කාලීන කිරීම අසාර්ථකයි.",
-  "subdomainReadonly": "ඔබගේ වෙබ් ලිපිනය වෙනස් කළ නොහැක."
+  "subdomainReadonly": "ඔබගේ වෙබ් ලිපිනය වෙනස් කළ නොහැක.",
+  "chat": {
+    "title": "කතාබස්",
+    "send": "යවන්න",
+    "book_appointment": "වේලාවක් වෙන්කරවා ගන්න",
+    "reschedule": "වෙනස් කරන්න",
+    "cancel": "අවලංගු කරන්න",
+    "talk_to_staff": "සේවකයෙකුට කතා කරන්න",
+    "language": "භාෂාව",
+    "available_times": "ඇති වේලාවන්",
+    "appointment_confirmed": "වෙන්කරවා ගැනීම තහවුරු විය",
+    "appointment_cancelled": "වෙන්කරවා ගැනීම අවලංගු විය",
+    "appointment_rescheduled": "වෙන්කරවා ගැනීම වෙනස් විය",
+    "human_support": "සේවක සහාය"
+  }
 }

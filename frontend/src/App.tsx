@@ -3,9 +3,9 @@ import { useTranslation } from 'react-i18next';
 import { Globe, LogOut, Settings } from 'lucide-react';
 import akarshaLogoDark from './assets/akarsha-logo-dark.svg';
 import akarshaMark from './assets/akarsha-mark.svg';
-
 import { LoginScreen } from './features/auth/LoginScreen';
 import { SignupScreen } from './features/auth/SignupScreen';
+import { ChatWidget } from './features/chat/ChatWidget';
 import { CreateSalonScreen } from './features/onboarding/CreateSalonScreen';
 import { SetupWizard } from './features/onboarding/SetupWizard';
 import { Dashboard } from './pages/Dashboard';
@@ -16,8 +16,9 @@ import { ServicesPage } from './pages/ServicesPage';
 import { SettingsPage } from './pages/SettingsPage';
 import type { SalonData } from './types';
 import { ReportsPage } from './pages/ReportsPage';
+import { ConversationsPage } from './pages/ConversationsPage';
 
-type ScreenState = 'LOGIN' | 'SIGNUP' | 'CREATE_SALON' | 'SETUP_WIZARD' | 'DASHBOARD' | 'CUSTOMERS' | 'APPOINTMENTS' | 'STAFF' | 'SERVICES' | 'SETTINGS' | 'REPORTS';
+type ScreenState = 'LOGIN' | 'SIGNUP' | 'CREATE_SALON' | 'SETUP_WIZARD' | 'DASHBOARD' | 'CUSTOMERS' | 'APPOINTMENTS' | 'STAFF' | 'SERVICES' | 'SETTINGS' | 'REPORTS' | 'CONVERSATIONS';
 
 function App() {
   const { t, i18n } = useTranslation();
@@ -127,6 +128,15 @@ function App() {
               >
                 {t('navCustomers')}
               </button>
+              
+              {userRole !== 'STAFF' && (
+                <button 
+                  onClick={() => { setScreen('CONVERSATIONS'); setError(null); }}
+                  className={`text-sm font-medium transition-colors py-1 ${screen === 'CONVERSATIONS' ? 'text-brand-800 border-b-2 border-brand-800' : 'text-neutral-500 hover:text-neutral-800'}`}
+                >
+                  Inbox
+                </button>
+              )}
             </nav>
           )}
         </div>
@@ -274,6 +284,14 @@ function App() {
             <div className="flex justify-center py-20 text-neutral-500">Access Denied</div>
           )
         )}
+
+        {screen === 'CONVERSATIONS' && (
+          userRole !== 'STAFF' ? (
+            <ConversationsPage />
+          ) : (
+            <div className="flex justify-center py-20 text-neutral-500">Access Denied</div>
+          )
+        )}
       </main>
 
       {/* Footer */}
@@ -287,6 +305,7 @@ function App() {
           <a href="#" className="hover:text-neutral-600 transition-colors">Documentation</a>
         </div>
       </footer>
+      <ChatWidget />
     </div>
   );
 }

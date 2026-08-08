@@ -1,0 +1,29 @@
+package com.akarsha.chat.ai;
+
+public class AiMessage {
+    private String role; // "system", "user", "assistant", "tool"
+    private String content;
+
+    public AiMessage() {}
+
+    public AiMessage(String role, String content) {
+        this.role = role;
+        this.content = content;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+}
