@@ -1,0 +1,23 @@
+# Maven
+backend/target/
+backend/.mvn/
+backend/mvnw
+backend/mvnw.cmd
+
+# Node / Vite
+frontend/node_modules/
+frontend/dist/
+frontend/.npm/
+
+# IDEs and environments
+.idea/
+.vscode/
+*.iml
+*.iws
+.DS_Store
+.env
+
+# Logs and databases
+*.log
+*.sqlite
+*.db

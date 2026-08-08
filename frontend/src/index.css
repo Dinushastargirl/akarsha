@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+@theme {
+  /* Official Akarsha Brand Palette */
+  --color-brand-50: #FAF7F2;   /* Soft Ivory */
+  --color-brand-100: #F3ECE4;
+  --color-brand-200: #E8D8CC;
+  --color-brand-300: #D8B878;   /* Champagne */
+  --color-brand-400: #C88A9A;   /* Rose Gold */
+  --color-brand-500: #9E5A6E;
+  --color-brand-600: #6E3254;
+  --color-brand-700: #5A2548;
+  --color-brand-800: #4A1942;   /* Deep Plum */
+  --color-brand-900: #3A1234;
+  
+  /* Calm Neutrals — recalibrated for the plum palette */
+  --color-neutral-50: #FAF7F2;
+  --color-neutral-100: #F5F2ED;
+  --color-neutral-200: #EAE6E0;
+  --color-neutral-300: #D9D4CE;
+  --color-neutral-400: #B0AAA2;
+  --color-neutral-500: #8A847C;
+  --color-neutral-600: #6B665E;
+  --color-neutral-700: #4E4A44;
+  --color-neutral-800: #332F2B;
+  --color-neutral-900: #211F23;   /* Charcoal */
+
+  /* Alerts */
+  --color-error: #B54735;
+  --color-success: #386A46;
+  --color-warning: #C0821A;
+  --color-info: #2E5A88;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  
+  /* Custom micro-animations & shadows */
+  --animate-subtle-fade: fadeIn 0.15s ease-out;
+  --shadow-sm-flat: 0 1px 2px 0 rgba(33, 31, 35, 0.04);
+  --shadow-md-flat: 0 4px 12px 0 rgba(33, 31, 35, 0.06);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(2px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+html, body {
+  background-color: var(--color-neutral-50);
+  color: var(--color-neutral-900);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Akarsha Permanent Design System Components */
+.akarsha-heading {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  color: var(--color-neutral-900);
+  line-height: 1.25;
+}
+
+.akarsha-body {
+  font-family: var(--font-sans);
+  color: var(--color-neutral-600);
+  font-weight: 300;
+}
+
+.akarsha-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-neutral-500);
+  font-weight: 500;
+  margin-bottom: 0.375rem;
+}
+
+.akarsha-input {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 4px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  color: var(--color-neutral-900);
+  outline: none;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.akarsha-input:focus {
+  border-color: var(--color-brand-400);
+  box-shadow: 0 0 0 2px rgba(200, 138, 154, 0.15);
+}
+
+.akarsha-btn-primary {
+  background-color: var(--color-brand-800);
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  transition: background-color 0.15s ease-in-out;
+  cursor: pointer;
+  border: none;
+}
+
+.akarsha-btn-primary:hover {
+  background-color: var(--color-brand-700);
+}
+
+.akarsha-btn-secondary {
+  background-color: transparent;
+  color: var(--color-neutral-700);
+  border: 1px solid var(--color-neutral-300);
+  border-radius: 4px;
+  padding: 0.625rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.15s ease-in-out;
+  cursor: pointer;
+}
+
+.akarsha-btn-secondary:hover {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+}
+
+.akarsha-btn-tertiary {
+  background-color: transparent;
+  color: var(--color-neutral-500);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease-in-out;
+  text-decoration: underline;
+}
+
+.akarsha-btn-tertiary:hover {
+  color: var(--color-neutral-800);
+}
+
+.akarsha-form-group {
+  margin-bottom: 1.25rem;
+}

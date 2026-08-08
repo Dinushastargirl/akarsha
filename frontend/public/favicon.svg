@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
+  <!-- Deep Plum background circle -->
+  <rect width="48" height="48" rx="10" fill="#4A1942"/>
+  <!-- Stylized "A" mark -->
+  <g transform="translate(3, 2)">
+    <path d="M8 42 C8 42, 13 36, 16 28 C19 20, 22 10, 25 5 C25.8 3.5, 26.5 2.5, 27 3 C27.5 3.5, 27.5 5, 27 7 C24.5 16, 20 27, 17 34 C15.5 37, 14 39, 12.5 40.5 C10 42.5, 8 43, 6.5 42 C5 41, 5 38, 6.5 33 C8 28, 11 22, 14 18" stroke="#FAF7F2" stroke-width="2.8" fill="none" stroke-linecap="round"/>
+    <path d="M20.5 5 L36 42" stroke="#FAF7F2" stroke-width="2.8" stroke-linecap="round"/>
+    <circle cx="19" cy="19" r="2.5" fill="#D8B878"/>
+  </g>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60" fill="none">
+  <!-- Stylized "A" mark with swirl and champagne dot -->
+  <g transform="translate(6, 5)">
+    <!-- Left swirl stroke of A -->
+    <path d="M8 48 C8 48, 14 42, 18 32 C22 22, 26 10, 30 4 C31 2, 32 1, 33 2 C34 3, 34 5, 33 8 C30 18, 24 30, 20 38 C18 42, 16 44, 14 46 C11 49, 8 50, 6 48 C4 46, 4 42, 6 36 C8 30, 12 24, 16 20" stroke="#FAF7F2" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- Right leg of A -->
+    <path d="M24 4 L42 48" stroke="#FAF7F2" stroke-width="3" stroke-linecap="round"/>
+    <!-- Champagne dot -->
+    <circle cx="22" cy="22" r="3" fill="#D8B878"/>
+  </g>
+</svg>
