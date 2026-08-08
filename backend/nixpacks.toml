@@ -1,0 +1,9 @@
+[phases.build]
+cmds = ["mvn -B -DskipTests clean package"]
+
+[start]
+cmd = "java -Xmx300m -XX:+UseSerialGC -jar target/*.jar"
+
+[variables]
+SPRING_PROFILES_ACTIVE = "default"
+JAVA_TOOL_OPTIONS = "-Xmx300m -XX:+UseSerialGC"
