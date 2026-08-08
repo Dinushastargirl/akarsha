@@ -150,8 +150,8 @@ function App() {
               className="text-xs bg-transparent border-none text-neutral-600 focus:ring-0 cursor-pointer font-medium hover:text-neutral-900 outline-none"
             >
               <option value="en">English</option>
-              <option value="si_lk">Singlish</option>
-              <option value="ta_lk">Tanglish</option>
+              <option value="si_lk">සිංහල (Sinhala)</option>
+              <option value="ta_lk">தமிழ் (Tamil)</option>
             </select>
           </div>
 
