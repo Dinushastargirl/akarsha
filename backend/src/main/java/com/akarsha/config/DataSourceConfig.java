@@ -17,17 +17,27 @@ public class DataSourceConfig {
     public DataSource dataSource() throws URISyntaxException {
         String dbUrl = System.getenv("DATABASE_URL");
         if (dbUrl != null && dbUrl.startsWith("postgres")) {
-            URI dbUri = new URI(dbUrl);
-            String username = dbUri.getUserInfo() != null ? dbUri.getUserInfo().split(":")[0] : "postgres";
-            String password = dbUri.getUserInfo() != null && dbUri.getUserInfo().contains(":") ? dbUri.getUserInfo().split(":")[1] : "";
-            String jdbcUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
+            try {
+                String withoutScheme = dbUrl.substring(dbUrl.indexOf("://") + 3);
+                int atIndex = withoutScheme.lastIndexOf('@');
+                
+                String credentials = withoutScheme.substring(0, atIndex);
+                String hostPortDb = withoutScheme.substring(atIndex + 1);
+                
+                String username = credentials.contains(":") ? credentials.substring(0, credentials.indexOf(':')) : credentials;
+                String password = credentials.contains(":") ? credentials.substring(credentials.indexOf(':') + 1) : "";
+                
+                String jdbcUrl = "jdbc:postgresql://" + hostPortDb;
 
-            return DataSourceBuilder.create()
-                    .url(jdbcUrl)
-                    .username(username)
-                    .password(password)
-                    .driverClassName("org.postgresql.Driver")
-                    .build();
+                return DataSourceBuilder.create()
+                        .url(jdbcUrl)
+                        .username(username)
+                        .password(password)
+                        .driverClassName("org.postgresql.Driver")
+                        .build();
+            } catch (Exception e) {
+                // fallback below
+            }
         }
 
         // Fallback to local or PG variables
