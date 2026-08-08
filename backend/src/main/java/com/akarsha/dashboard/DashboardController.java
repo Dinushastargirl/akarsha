@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/dashboard")
+@RequestMapping("/dashboard")
 public class DashboardController {
 
     private static final List<AppointmentStatus> REVENUE_STATUSES = List.of(

@@ -167,7 +167,7 @@ public class AppointmentVerificationTest {
                 """, customerAlpha.getId(), serviceAlpha.getId(), staffAlpha.getId(), LocalDate.now().toString());
 
         // Create
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -176,7 +176,7 @@ public class AppointmentVerificationTest {
                 .andExpect(jsonPath("$.notes").value("Prefers warm tea"));
 
         // List
-        mockMvc.perform(get("/api/v1/appointments")
+        mockMvc.perform(get("/appointments")
                 .header("Authorization", authHeader)
                 .param("date", LocalDate.now().toString()))
                 .andExpect(status().isOk())
@@ -201,7 +201,7 @@ public class AppointmentVerificationTest {
                 }
                 """, customerAlpha.getId(), serviceAlpha.getId(), staffAlpha.getId(), dateStr);
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload1))
@@ -219,7 +219,7 @@ public class AppointmentVerificationTest {
                 }
                 """, customerAlpha.getId(), serviceAlpha.getId(), staffAlpha.getId(), dateStr);
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload2))
@@ -244,7 +244,7 @@ public class AppointmentVerificationTest {
                 }
                 """, customerBeta.getId(), serviceAlpha.getId(), staffAlpha.getId(), dateStr);
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -271,14 +271,14 @@ public class AppointmentVerificationTest {
 
         // 2. Authenticated as Salon Beta: Attempt to load appointment details of Salon Alpha -> Should reject with 404
         String authHeaderBeta = getAuthHeader("owner@beta.com", salonBeta.getSubdomain());
-        mockMvc.perform(get("/api/v1/appointments/" + appointment.getId())
+        mockMvc.perform(get("/appointments/" + appointment.getId())
                 .header("Authorization", authHeaderBeta))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     public void testUnauthenticatedAccessRejection() throws Exception {
-        mockMvc.perform(get("/api/v1/appointments"))
+        mockMvc.perform(get("/appointments"))
                 .andExpect(status().isForbidden());
     }
 }

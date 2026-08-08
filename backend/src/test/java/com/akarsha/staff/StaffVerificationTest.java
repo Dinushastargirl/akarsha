@@ -147,7 +147,7 @@ public class StaffVerificationTest {
                 """, email);
 
         // Create Staff Member
-        mockMvc.perform(post("/api/v1/staff")
+        mockMvc.perform(post("/staff")
                 .header("Authorization", authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -156,7 +156,7 @@ public class StaffVerificationTest {
                 .andExpect(jsonPath("$.active").value(true));
 
         // Search Staff Members
-        mockMvc.perform(get("/api/v1/staff")
+        mockMvc.perform(get("/staff")
                 .header("Authorization", authHeader)
                 .param("query", "New Operator"))
                 .andExpect(status().isOk())
@@ -168,7 +168,7 @@ public class StaffVerificationTest {
     public void testDeactivateStaff() throws Exception {
         String authHeader = getAuthHeader("owner@alpha.com", salonAlpha.getSubdomain());
 
-        mockMvc.perform(patch("/api/v1/staff/" + staffAlpha.getId() + "/status")
+        mockMvc.perform(patch("/staff/" + staffAlpha.getId() + "/status")
                 .header("Authorization", authHeader)
                 .param("active", "false"))
                 .andExpect(status().isOk())
@@ -179,12 +179,12 @@ public class StaffVerificationTest {
     public void testCrossTenantAccessRejection() throws Exception {
         // Authenticated as Salon Beta, attempt to read Salon Alpha Staff member -> Should return 404
         String authHeaderBeta = getAuthHeader("owner@beta.com", salonBeta.getSubdomain());
-        mockMvc.perform(get("/api/v1/staff/" + staffAlpha.getId())
+        mockMvc.perform(get("/staff/" + staffAlpha.getId())
                 .header("Authorization", authHeaderBeta))
                 .andExpect(status().isNotFound());
 
         // Attempt to assign cross-tenant services -> Should return 400 Bad Request
-        mockMvc.perform(put("/api/v1/staff/" + staffBeta.getId() + "/services")
+        mockMvc.perform(put("/staff/" + staffBeta.getId() + "/services")
                 .header("Authorization", authHeaderBeta)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("[" + serviceAlpha.getId() + "]"))
@@ -211,7 +211,7 @@ public class StaffVerificationTest {
                 ]
                 """;
 
-        mockMvc.perform(put("/api/v1/staff/" + staffAlpha.getId() + "/schedule")
+        mockMvc.perform(put("/staff/" + staffAlpha.getId() + "/schedule")
                 .header("Authorization", authHeader)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -223,7 +223,7 @@ public class StaffVerificationTest {
 
     @Test
     public void testUnauthenticatedAccessRejection() throws Exception {
-        mockMvc.perform(get("/api/v1/staff"))
+        mockMvc.perform(get("/staff"))
                 .andExpect(status().isForbidden());
     }
 }

@@ -38,13 +38,13 @@ public class SecurityVerificationTest {
 
     @Test
     public void whenUnauthenticated_thenRejected() throws Exception {
-        mockMvc.perform(get("/api/v1/test/users"))
+        mockMvc.perform(get("/test/users"))
                 .andExpect(status().isForbidden());
     }
 
     @Test
     public void whenInvalidToken_thenRejected() throws Exception {
-        mockMvc.perform(get("/api/v1/test/users")
+        mockMvc.perform(get("/test/users")
                         .header("Authorization", "Bearer invalid.token.value"))
                 .andExpect(status().isForbidden());
     }
@@ -54,7 +54,7 @@ public class SecurityVerificationTest {
         // Generate token for owner@alpha.com (tenant: alpha, role: SALON_OWNER)
         String token = jwtService.generateToken("owner@alpha.com", "alpha", "SALON_OWNER");
 
-        mockMvc.perform(get("/api/v1/test/users")
+        mockMvc.perform(get("/test/users")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(4)))
@@ -67,7 +67,7 @@ public class SecurityVerificationTest {
         // Generate token for owner@beta.com (tenant: beta, role: SALON_OWNER)
         String token = jwtService.generateToken("owner@beta.com", "beta", "SALON_OWNER");
 
-        mockMvc.perform(get("/api/v1/test/users")
+        mockMvc.perform(get("/test/users")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
@@ -85,7 +85,7 @@ public class SecurityVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/public/auth/login")
+        mockMvc.perform(post("/public/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(loginPayload))
                 .andExpect(status().isOk())
@@ -102,7 +102,7 @@ public class SecurityVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/public/auth/login")
+        mockMvc.perform(post("/public/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(loginPayload))
                 .andExpect(status().isUnauthorized());

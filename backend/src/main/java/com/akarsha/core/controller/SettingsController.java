@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/settings")
+@RequestMapping("/settings")
 @PreAuthorize("hasAnyRole('SALON_OWNER', 'MANAGER')")
 public class SettingsController {
 

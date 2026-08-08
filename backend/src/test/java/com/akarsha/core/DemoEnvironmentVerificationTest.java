@@ -45,7 +45,7 @@ public class DemoEnvironmentVerificationTest {
         staffHeaders.setBearerAuth(staffToken);
         staffHeaders.set("X-Tenant-ID", "alpha");
         HttpEntity<?> staffRequest = new HttpEntity<>(Map.of("name", "Haircut", "price", 50, "durationMinutes", 30), staffHeaders);
-        ResponseEntity<String> staffServiceCreate = restTemplate.postForEntity("/api/v1/services", staffRequest, String.class);
+        ResponseEntity<String> staffServiceCreate = restTemplate.postForEntity("/services", staffRequest, String.class);
         assertThat(staffServiceCreate.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         System.out.println("staff attempting to modify services -> 403");
 
@@ -54,7 +54,7 @@ public class DemoEnvironmentVerificationTest {
         receptionistHeaders.setBearerAuth(receptionistToken);
         receptionistHeaders.set("X-Tenant-ID", "alpha");
         HttpEntity<?> receptionistRequest = new HttpEntity<>(Map.of("name", "New Name"), receptionistHeaders);
-        ResponseEntity<String> receptionistSettingsUpdate = restTemplate.exchange("/api/v1/settings", HttpMethod.PUT, receptionistRequest, String.class);
+        ResponseEntity<String> receptionistSettingsUpdate = restTemplate.exchange("/settings", HttpMethod.PUT, receptionistRequest, String.class);
         assertThat(receptionistSettingsUpdate.getStatusCode()).isEqualTo(HttpStatus.FORBIDDEN);
         System.out.println("receptionist attempting owner-only settings -> 403");
 
@@ -63,7 +63,7 @@ public class DemoEnvironmentVerificationTest {
         managerHeaders.setBearerAuth(managerToken);
         managerHeaders.set("X-Tenant-ID", "alpha");
         HttpEntity<?> managerRequest = new HttpEntity<>(managerHeaders);
-        ResponseEntity<String> managerReports = restTemplate.exchange("/api/v1/reports/overview?startDate=2026-08-01&endDate=2026-08-31", HttpMethod.GET, managerRequest, String.class);
+        ResponseEntity<String> managerReports = restTemplate.exchange("/reports/overview?startDate=2026-08-01&endDate=2026-08-31", HttpMethod.GET, managerRequest, String.class);
         assertThat(managerReports.getStatusCode()).isEqualTo(HttpStatus.OK);
         System.out.println("manager accessing reports -> 200");
 
@@ -72,7 +72,7 @@ public class DemoEnvironmentVerificationTest {
         ownerHeaders.setBearerAuth(ownerToken);
         ownerHeaders.set("X-Tenant-ID", "alpha");
         HttpEntity<?> ownerRequest = new HttpEntity<>(ownerHeaders);
-        ResponseEntity<String> ownerReports = restTemplate.exchange("/api/v1/reports/overview?startDate=2026-08-01&endDate=2026-08-31", HttpMethod.GET, ownerRequest, String.class);
+        ResponseEntity<String> ownerReports = restTemplate.exchange("/reports/overview?startDate=2026-08-01&endDate=2026-08-31", HttpMethod.GET, ownerRequest, String.class);
         assertThat(ownerReports.getStatusCode()).isEqualTo(HttpStatus.OK);
         System.out.println("owner accessing reports -> 200");
     }
@@ -84,7 +84,7 @@ public class DemoEnvironmentVerificationTest {
         Map<String, String> request = Map.of("email", email, "password", password);
         HttpEntity<Map<String, String>> entity = new HttpEntity<>(request, headers);
 
-        ResponseEntity<Map> response = restTemplate.postForEntity("/api/v1/public/auth/login", entity, Map.class);
+        ResponseEntity<Map> response = restTemplate.postForEntity("/public/auth/login", entity, Map.class);
         if (response.getStatusCode() == HttpStatus.OK && response.getBody() != null) {
             return (String) response.getBody().get("token");
         }

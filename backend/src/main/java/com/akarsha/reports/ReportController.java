@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/reports")
+@RequestMapping("/reports")
 @PreAuthorize("hasAnyRole('SALON_OWNER', 'MANAGER')")
 public class ReportController {
 

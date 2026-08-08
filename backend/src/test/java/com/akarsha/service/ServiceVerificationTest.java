@@ -156,7 +156,7 @@ public class ServiceVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/services")
+        mockMvc.perform(post("/services")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -181,7 +181,7 @@ public class ServiceVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(put("/api/v1/services/" + serviceAlpha.getId())
+        mockMvc.perform(put("/services/" + serviceAlpha.getId())
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -198,7 +198,7 @@ public class ServiceVerificationTest {
         String auth = getAuthHeader("owner@alpha.com", salonAlpha.getSubdomain());
 
         // Alpha can see its own services
-        mockMvc.perform(get("/api/v1/services")
+        mockMvc.perform(get("/services")
                 .header("Authorization", auth)
                 .param("query", "Haircut"))
                 .andExpect(status().isOk())
@@ -222,7 +222,7 @@ public class ServiceVerificationTest {
         TenantContext.clear();
 
         // Page 0, size 1 — should get exactly 1 result
-        mockMvc.perform(get("/api/v1/services")
+        mockMvc.perform(get("/services")
                 .header("Authorization", auth)
                 .param("page", "0")
                 .param("size", "1"))
@@ -238,14 +238,14 @@ public class ServiceVerificationTest {
         String auth = getAuthHeader("owner@alpha.com", salonAlpha.getSubdomain());
 
         // Deactivate
-        mockMvc.perform(patch("/api/v1/services/" + serviceAlpha.getId() + "/status")
+        mockMvc.perform(patch("/services/" + serviceAlpha.getId() + "/status")
                 .header("Authorization", auth)
                 .param("active", "false"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.active").value(false));
 
         // Reactivate
-        mockMvc.perform(patch("/api/v1/services/" + serviceAlpha.getId() + "/status")
+        mockMvc.perform(patch("/services/" + serviceAlpha.getId() + "/status")
                 .header("Authorization", auth)
                 .param("active", "true"))
                 .andExpect(status().isOk())
@@ -263,14 +263,14 @@ public class ServiceVerificationTest {
         TenantContext.clear();
 
         // Filter active only — should be empty for Alpha
-        mockMvc.perform(get("/api/v1/services")
+        mockMvc.perform(get("/services")
                 .header("Authorization", auth)
                 .param("active", "true"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(0)));
 
         // Filter inactive only — should have 1
-        mockMvc.perform(get("/api/v1/services")
+        mockMvc.perform(get("/services")
                 .header("Authorization", auth)
                 .param("active", "false"))
                 .andExpect(status().isOk())
@@ -291,7 +291,7 @@ public class ServiceVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/services")
+        mockMvc.perform(post("/services")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -310,7 +310,7 @@ public class ServiceVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/services")
+        mockMvc.perform(post("/services")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -329,7 +329,7 @@ public class ServiceVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/services")
+        mockMvc.perform(post("/services")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -343,7 +343,7 @@ public class ServiceVerificationTest {
         // Beta authenticated user should NOT see Alpha services
         String authBeta = getAuthHeader("owner@beta.com", salonBeta.getSubdomain());
 
-        mockMvc.perform(get("/api/v1/services")
+        mockMvc.perform(get("/services")
                 .header("Authorization", authBeta)
                 .param("query", "Haircut Alpha"))
                 .andExpect(status().isOk())
@@ -355,7 +355,7 @@ public class ServiceVerificationTest {
         // Beta cannot read Alpha's service by ID
         String authBeta = getAuthHeader("owner@beta.com", salonBeta.getSubdomain());
 
-        mockMvc.perform(get("/api/v1/services/" + serviceAlpha.getId())
+        mockMvc.perform(get("/services/" + serviceAlpha.getId())
                 .header("Authorization", authBeta))
                 .andExpect(status().isNotFound());
     }
@@ -373,7 +373,7 @@ public class ServiceVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(put("/api/v1/services/" + serviceAlpha.getId())
+        mockMvc.perform(put("/services/" + serviceAlpha.getId())
                 .header("Authorization", authBeta)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -385,7 +385,7 @@ public class ServiceVerificationTest {
         // Beta cannot patch status of Alpha's service
         String authBeta = getAuthHeader("owner@beta.com", salonBeta.getSubdomain());
 
-        mockMvc.perform(patch("/api/v1/services/" + serviceAlpha.getId() + "/status")
+        mockMvc.perform(patch("/services/" + serviceAlpha.getId() + "/status")
                 .header("Authorization", authBeta)
                 .param("active", "false"))
                 .andExpect(status().isNotFound());
@@ -396,7 +396,7 @@ public class ServiceVerificationTest {
         // Beta cannot delete Alpha's service
         String authBeta = getAuthHeader("owner@beta.com", salonBeta.getSubdomain());
 
-        mockMvc.perform(delete("/api/v1/services/" + serviceAlpha.getId())
+        mockMvc.perform(delete("/services/" + serviceAlpha.getId())
                 .header("Authorization", authBeta))
                 .andExpect(status().isNotFound());
     }
@@ -410,7 +410,7 @@ public class ServiceVerificationTest {
         // Confirm service exists
         long idToDelete = serviceAlpha.getId();
 
-        mockMvc.perform(delete("/api/v1/services/" + idToDelete)
+        mockMvc.perform(delete("/services/" + idToDelete)
                 .header("Authorization", auth))
                 .andExpect(status().isOk());
 
@@ -440,7 +440,7 @@ public class ServiceVerificationTest {
         String auth = getAuthHeader("owner@alpha.com", salonAlpha.getSubdomain());
 
         // DELETE should archive, not hard delete
-        mockMvc.perform(delete("/api/v1/services/" + serviceAlpha.getId())
+        mockMvc.perform(delete("/services/" + serviceAlpha.getId())
                 .header("Authorization", auth))
                 .andExpect(status().isOk());
 
@@ -470,7 +470,7 @@ public class ServiceVerificationTest {
 
         // Archive the service via DELETE (which degrades to archive)
         String auth = getAuthHeader("owner@alpha.com", salonAlpha.getSubdomain());
-        mockMvc.perform(delete("/api/v1/services/" + serviceAlpha.getId())
+        mockMvc.perform(delete("/services/" + serviceAlpha.getId())
                 .header("Authorization", auth))
                 .andExpect(status().isOk());
 
@@ -491,7 +491,7 @@ public class ServiceVerificationTest {
         // Assign serviceAlpha to staffAlpha via the staff/services endpoint
         String assignPayload = "[" + serviceAlpha.getId() + "]";
 
-        mockMvc.perform(put("/api/v1/staff/" + staffAlpha.getId() + "/services")
+        mockMvc.perform(put("/staff/" + staffAlpha.getId() + "/services")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(assignPayload))
@@ -506,7 +506,7 @@ public class ServiceVerificationTest {
         String authAlpha = getAuthHeader("owner@alpha.com", salonAlpha.getSubdomain());
         String assignPayload = "[" + serviceBeta.getId() + "]";
 
-        mockMvc.perform(put("/api/v1/staff/" + staffAlpha.getId() + "/services")
+        mockMvc.perform(put("/staff/" + staffAlpha.getId() + "/services")
                 .header("Authorization", authAlpha)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(assignPayload))
@@ -530,7 +530,7 @@ public class ServiceVerificationTest {
                 """, customerAlpha.getId(), serviceAlpha.getId(), staffAlpha.getId(), LocalDate.now().toString());
 
         // serviceAlpha is active — booking should succeed
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -561,7 +561,7 @@ public class ServiceVerificationTest {
                 """, customerAlpha.getId(), serviceAlpha.getId(), staffAlpha.getId(), LocalDate.now().toString());
 
         // serviceAlpha is inactive — booking must fail
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", auth)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(payload))
@@ -572,7 +572,7 @@ public class ServiceVerificationTest {
 
     @Test
     public void testUnauthenticatedAccessRejection() throws Exception {
-        mockMvc.perform(get("/api/v1/services"))
+        mockMvc.perform(get("/services"))
                 .andExpect(status().isForbidden());
     }
 }

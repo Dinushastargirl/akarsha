@@ -32,7 +32,7 @@ public class AuthorizationVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(put("/api/v1/settings")
+        mockMvc.perform(put("/settings")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
@@ -54,7 +54,7 @@ public class AuthorizationVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(put("/api/v1/settings")
+        mockMvc.perform(put("/settings")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
@@ -74,7 +74,7 @@ public class AuthorizationVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/staff")
+        mockMvc.perform(post("/staff")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
@@ -85,7 +85,7 @@ public class AuthorizationVerificationTest {
     public void whenStaffViewsCustomers_thenAllowed() throws Exception {
         String token = jwtService.generateToken("staff@alpha.com", "alpha", "STAFF");
 
-        mockMvc.perform(get("/api/v1/customers")
+        mockMvc.perform(get("/customers")
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk());
     }

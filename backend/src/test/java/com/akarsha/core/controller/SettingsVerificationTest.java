@@ -48,7 +48,7 @@ public class SettingsVerificationTest {
     public void whenGetSettings_thenReturnsCorrectTenantSalon() throws Exception {
         String alphaAuth = getAuthHeader("owner@alpha.com", "alpha");
 
-        mockMvc.perform(get("/api/v1/settings")
+        mockMvc.perform(get("/settings")
                         .header("Authorization", alphaAuth))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Salon Alpha"))
@@ -71,7 +71,7 @@ public class SettingsVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(put("/api/v1/settings")
+        mockMvc.perform(put("/settings")
                         .header("Authorization", alphaAuth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatePayload))
@@ -94,7 +94,7 @@ public class SettingsVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(put("/api/v1/settings")
+        mockMvc.perform(put("/settings")
                         .header("Authorization", alphaAuth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatePayload))
@@ -103,7 +103,7 @@ public class SettingsVerificationTest {
 
     @Test
     public void whenUnauthenticated_thenRejected() throws Exception {
-        mockMvc.perform(get("/api/v1/settings"))
+        mockMvc.perform(get("/settings"))
                 .andExpect(status().isForbidden());
     }
 }

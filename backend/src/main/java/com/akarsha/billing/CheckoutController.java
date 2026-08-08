@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/v1/checkout")
+@RequestMapping("/checkout")
 public class CheckoutController {
 
     private final InvoiceRepository invoiceRepository;

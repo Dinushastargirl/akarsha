@@ -146,7 +146,7 @@ public class DashboardVerificationTest {
 
     @Test
     public void testEmptyDashboard() throws Exception {
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayTotal").value(0))
@@ -167,7 +167,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.CANCELLED,  LocalTime.of(12, 0), LocalTime.of(12, 30));
         makeAppointment(AppointmentStatus.NO_SHOW,    LocalTime.of(13, 0), LocalTime.of(13, 30));
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayTotal").value(5))
@@ -187,7 +187,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.CANCELLED, LocalTime.of(12, 0), LocalTime.of(12, 30));
         makeAppointment(AppointmentStatus.NO_SHOW,   LocalTime.of(13, 0), LocalTime.of(13, 30));
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayEstimatedRevenue").value(4500));
@@ -200,7 +200,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.CANCELLED, LocalTime.of(9, 0),  LocalTime.of(9, 30));
         makeAppointment(AppointmentStatus.NO_SHOW,   LocalTime.of(10, 0), LocalTime.of(10, 30));
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayEstimatedRevenue").value(0));
@@ -214,7 +214,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.CANCELLED, LocalTime.of(10, 0), LocalTime.of(10, 30));
         makeAppointment(AppointmentStatus.NO_SHOW,   LocalTime.of(11, 0), LocalTime.of(11, 30));
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 // Only BOOKED appears in upcoming
@@ -230,7 +230,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.BOOKED,    LocalTime.of(9, 0),  LocalTime.of(9, 30));
         makeAppointment(AppointmentStatus.CANCELLED, LocalTime.of(10, 0), LocalTime.of(10, 30));
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayTimeline", hasSize(3)))
@@ -254,7 +254,7 @@ public class DashboardVerificationTest {
         TenantContext.clear();
 
         // Dashboard should still count the historical appointment in revenue
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayEstimatedRevenue").value(1500))
@@ -271,7 +271,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.BOOKED, LocalTime.of(9, 0), LocalTime.of(9, 30));
 
         // Beta authenticated user should see 0 appointments, not Alpha's data
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@beta.com", salonBeta.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayTotal").value(0))
@@ -284,7 +284,7 @@ public class DashboardVerificationTest {
         makeAppointment(AppointmentStatus.COMPLETED, LocalTime.of(9, 0), LocalTime.of(9, 30));
 
         // Beta cannot see Alpha's revenue
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@beta.com", salonBeta.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.todayEstimatedRevenue").value(0));
@@ -312,13 +312,13 @@ public class DashboardVerificationTest {
         TenantContext.clear();
 
         // Alpha should see 2 customers
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalCustomers").value(2));
 
         // Beta should see only 1 customer
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@beta.com", salonBeta.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalCustomers").value(1));
@@ -340,7 +340,7 @@ public class DashboardVerificationTest {
         inactive.setTenantId(salonAlpha.getSubdomain());
         userRepository.save(inactive);
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.activeStaff").value(greaterThanOrEqualTo(1)));
@@ -374,7 +374,7 @@ public class DashboardVerificationTest {
         serviceRepository.save(s3);
         TenantContext.clear();
 
-        mockMvc.perform(get("/api/v1/dashboard")
+        mockMvc.perform(get("/dashboard")
                 .header("Authorization", auth("owner@alpha.com", salonAlpha.getSubdomain())))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.activeServices").value(2));
@@ -384,7 +384,7 @@ public class DashboardVerificationTest {
 
     @Test
     public void testUnauthenticatedAccess() throws Exception {
-        mockMvc.perform(get("/api/v1/dashboard"))
+        mockMvc.perform(get("/dashboard"))
                 .andExpect(status().isForbidden());
     }
 }

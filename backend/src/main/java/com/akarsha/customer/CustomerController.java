@@ -20,7 +20,7 @@ import com.akarsha.billing.Invoice;
 import com.akarsha.billing.InvoiceRepository;
 
 @RestController
-@RequestMapping("/api/v1/customers")
+@RequestMapping("/customers")
 public class CustomerController {
 
     private final CustomerRepository customerRepository;

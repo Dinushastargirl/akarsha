@@ -59,7 +59,7 @@ public class OnboardingVerificationTest {
                 """;
 
         // 1. Perform Signup
-        MvcResult signupResult = mockMvc.perform(post("/api/v1/public/auth/signup")
+        MvcResult signupResult = mockMvc.perform(post("/public/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(signupPayload))
                 .andExpect(status().isOk())
@@ -84,7 +84,7 @@ public class OnboardingVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/public/auth/login")
+        mockMvc.perform(post("/public/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(loginPayload))
                 .andExpect(status().isOk())
@@ -101,7 +101,7 @@ public class OnboardingVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/public/auth/signup")
+        mockMvc.perform(post("/public/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(duplicatePayload))
                 .andExpect(status().isBadRequest())
@@ -118,7 +118,7 @@ public class OnboardingVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/public/auth/signup")
+        mockMvc.perform(post("/public/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(badPayload))
                 .andExpect(status().isBadRequest());
@@ -151,7 +151,7 @@ public class OnboardingVerificationTest {
                 }
                 """;
 
-        MvcResult salonResult = mockMvc.perform(post("/api/v1/onboarding/create-salon")
+        MvcResult salonResult = mockMvc.perform(post("/onboarding/create-salon")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(salonPayload))
@@ -176,7 +176,7 @@ public class OnboardingVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/onboarding/setup")
+        mockMvc.perform(post("/onboarding/setup")
                         .header("Authorization", "Bearer " + updatedToken)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(setupPayload))
@@ -185,7 +185,7 @@ public class OnboardingVerificationTest {
         // 4. Verify tenant isolation (a user from 'alpha' salon cannot access 'nirvana-flow' services)
         String alphaToken = jwtService.generateToken("owner@alpha.com", "alpha", "SALON_OWNER");
 
-        mockMvc.perform(get("/api/v1/test/users")
+        mockMvc.perform(get("/test/users")
                         .header("Authorization", "Bearer " + alphaToken))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", not(containsString("Flow Stylist"))));

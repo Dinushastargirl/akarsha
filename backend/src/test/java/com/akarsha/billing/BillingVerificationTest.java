@@ -144,7 +144,7 @@ public class BillingVerificationTest {
 
     @Test
     void testCannotManuallyPatchToCompleted() throws Exception {
-        mockMvc.perform(patch("/api/v1/appointments/" + savedAppointment.getId() + "/status")
+        mockMvc.perform(patch("/appointments/" + savedAppointment.getId() + "/status")
                 .param("status", "COMPLETED")
                 .header("Authorization", token))
                 .andExpect(status().isBadRequest())
@@ -171,7 +171,7 @@ public class BillingVerificationTest {
 
         request.setLineItems(List.of(item1));
 
-        String res = mockMvc.perform(post("/api/v1/checkout/appointment/" + savedAppointment.getId())
+        String res = mockMvc.perform(post("/checkout/appointment/" + savedAppointment.getId())
                 .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))

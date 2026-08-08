@@ -62,7 +62,7 @@ public class CustomerVerificationTest {
                 }
                 """;
 
-        mockMvc.perform(post("/api/v1/customers")
+        mockMvc.perform(post("/customers")
                         .header("Authorization", authHeader)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payload))
@@ -88,13 +88,13 @@ public class CustomerVerificationTest {
         String betaAuth = getAuthHeader("owner@beta.com", "beta");
 
         // Alpha user can view it
-        mockMvc.perform(get("/api/v1/customers/" + c1.getId())
+        mockMvc.perform(get("/customers/" + c1.getId())
                         .header("Authorization", alphaAuth))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fullName").value("Alpha Customer"));
 
         // Beta user gets 404 due to tenant aspect filtering
-        mockMvc.perform(get("/api/v1/customers/" + c1.getId())
+        mockMvc.perform(get("/customers/" + c1.getId())
                         .header("Authorization", betaAuth))
                 .andExpect(status().isNotFound());
     }
@@ -121,14 +121,14 @@ public class CustomerVerificationTest {
                 """;
 
         // Beta user trying to update gets 404
-        mockMvc.perform(put("/api/v1/customers/" + c1.getId())
+        mockMvc.perform(put("/customers/" + c1.getId())
                         .header("Authorization", betaAuth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatePayload))
                 .andExpect(status().isNotFound());
 
         // Alpha user succeeds
-        mockMvc.perform(put("/api/v1/customers/" + c1.getId())
+        mockMvc.perform(put("/customers/" + c1.getId())
                         .header("Authorization", alphaAuth)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatePayload))
@@ -152,12 +152,12 @@ public class CustomerVerificationTest {
         String betaAuth = getAuthHeader("owner@beta.com", "beta");
 
         // Beta user trying to delete gets 404
-        mockMvc.perform(delete("/api/v1/customers/" + c1.getId())
+        mockMvc.perform(delete("/customers/" + c1.getId())
                         .header("Authorization", betaAuth))
                 .andExpect(status().isNotFound());
 
         // Alpha user deletes successfully
-        mockMvc.perform(delete("/api/v1/customers/" + c1.getId())
+        mockMvc.perform(delete("/customers/" + c1.getId())
                         .header("Authorization", alphaAuth))
                 .andExpect(status().isOk());
 
@@ -183,14 +183,14 @@ public class CustomerVerificationTest {
         String alphaAuth = getAuthHeader("owner@alpha.com", "alpha");
 
         // Search by name
-        mockMvc.perform(get("/api/v1/customers/search?query=sunil")
+        mockMvc.perform(get("/customers/search?query=sunil")
                         .header("Authorization", alphaAuth))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(1)))
                 .andExpect(jsonPath("$.content[0].fullName").value("Sunil Perera"));
 
         // Search by phone
-        mockMvc.perform(get("/api/v1/customers/search?query=07111")
+        mockMvc.perform(get("/customers/search?query=07111")
                         .header("Authorization", alphaAuth))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(1)))
@@ -207,7 +207,7 @@ public class CustomerVerificationTest {
                     "phone": "0771234567"
                 }
                 """;
-        mockMvc.perform(post("/api/v1/customers")
+        mockMvc.perform(post("/customers")
                         .header("Authorization", authHeader)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payloadNoName))
@@ -223,7 +223,7 @@ public class CustomerVerificationTest {
                     "email": "bademail"
                 }
                 """;
-        mockMvc.perform(post("/api/v1/customers")
+        mockMvc.perform(post("/customers")
                         .header("Authorization", authHeader)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(payloadBadEmail))
@@ -233,7 +233,7 @@ public class CustomerVerificationTest {
 
     @Test
     public void whenUnauthenticated_thenRejected() throws Exception {
-        mockMvc.perform(get("/api/v1/customers"))
+        mockMvc.perform(get("/customers"))
                 .andExpect(status().isForbidden());
     }
 
@@ -251,7 +251,7 @@ public class CustomerVerificationTest {
         String authHeader = getAuthHeader("owner@alpha.com", "alpha");
 
         // Page 0 should have 10 elements
-        mockMvc.perform(get("/api/v1/customers?page=0&size=10")
+        mockMvc.perform(get("/customers?page=0&size=10")
                         .header("Authorization", authHeader))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(10)))
@@ -259,7 +259,7 @@ public class CustomerVerificationTest {
                 .andExpect(jsonPath("$.totalElements").value(15));
 
         // Page 1 should have 5 elements
-        mockMvc.perform(get("/api/v1/customers?page=1&size=10")
+        mockMvc.perform(get("/customers?page=1&size=10")
                         .header("Authorization", authHeader))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.content", hasSize(5)));
@@ -278,7 +278,7 @@ public class CustomerVerificationTest {
 
         String alphaAuth = getAuthHeader("owner@alpha.com", "alpha");
 
-        mockMvc.perform(get("/api/v1/customers/" + c1.getId() + "/stats")
+        mockMvc.perform(get("/customers/" + c1.getId() + "/stats")
                         .header("Authorization", alphaAuth))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.totalVisits").value(0))

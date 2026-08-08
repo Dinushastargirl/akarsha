@@ -29,7 +29,7 @@ import com.akarsha.staff.StaffSchedule;
 import com.akarsha.staff.StaffScheduleRepository;
 
 @RestController
-@RequestMapping("/api/v1/appointments")
+@RequestMapping("/appointments")
 public class AppointmentController {
 
     private final AppointmentRepository appointmentRepository;

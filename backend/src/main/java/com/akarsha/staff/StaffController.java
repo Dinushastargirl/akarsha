@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @RestController
-@RequestMapping("/api/v1/staff")
+@RequestMapping("/staff")
 public class StaffController {
 
     private final UserRepository userRepository;

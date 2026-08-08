@@ -52,14 +52,26 @@ A deterministic demo environment using an H2 database is provided. This allows y
 
 ### Starting the Demo Backend
 
-To run the backend with the test data and the H2 database, use the `test` profile:
+To run the backend with the test data and the H2 database, use the `demo` profile and set the port to 8090:
 
 ```bash
 cd backend
-mvn spring-boot:run -Dspring-boot.run.profiles=test
+$env:SPRING_PROFILES_ACTIVE="demo"
+$env:PORT="8090"
+mvn spring-boot:run
 ```
+*(This starts the backend on `http://localhost:8090` to avoid conflicts with other applications)*
 
-*(Note: Windows users may need to set the environment variable explicitly: `$env:SPRING_PROFILES_ACTIVE="test"; mvn spring-boot:run`)*
+### Starting the Demo Frontend
+
+In a separate terminal, start the Vite development server:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+*(This starts the frontend on `http://localhost:5173`. It is configured to automatically communicate with the backend on port 8090)*
 
 ### H2 TEST/DEMO CREDENTIALS
 

@@ -146,7 +146,7 @@ public class StaffSchedulingVerificationTest {
         req.setStartTime(LocalTime.of(12, 30)); // Inside break
         req.setEndTime(LocalTime.of(13, 30)); 
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", ownerToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
@@ -173,7 +173,7 @@ public class StaffSchedulingVerificationTest {
         req.setStartTime(LocalTime.of(14, 30)); // Inside time off
         req.setEndTime(LocalTime.of(15, 30)); 
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", ownerToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
@@ -192,7 +192,7 @@ public class StaffSchedulingVerificationTest {
         req.setStartTime(LocalTime.of(8, 0)); // Before start time (09:00)
         req.setEndTime(LocalTime.of(9, 0)); 
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", ownerToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
@@ -211,7 +211,7 @@ public class StaffSchedulingVerificationTest {
         req.setStartTime(LocalTime.of(10, 0)); // Valid time
         req.setEndTime(LocalTime.of(15, 0)); // Wrong duration (duration is 60 min, so end should be 11:00)
 
-        mockMvc.perform(post("/api/v1/appointments")
+        mockMvc.perform(post("/appointments")
                 .header("Authorization", ownerToken)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(req)))
