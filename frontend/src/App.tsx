@@ -19,6 +19,8 @@ import { ReportsPage } from './pages/ReportsPage';
 import { ConversationsPage } from './pages/ConversationsPage';
 import { PlatformDashboardPage } from './pages/platform/PlatformDashboardPage';
 import { PlatformSalonsPage } from './pages/platform/PlatformSalonsPage';
+import { PublicBookingPage } from './pages/public/PublicBookingPage';
+import { CustomerPortalPage } from './pages/public/CustomerPortalPage';
 
 type ScreenState = 'LOGIN' | 'SIGNUP' | 'CREATE_SALON' | 'SETUP_WIZARD' | 'DASHBOARD' | 'CUSTOMERS' | 'APPOINTMENTS' | 'STAFF' | 'SERVICES' | 'SETTINGS' | 'REPORTS' | 'CONVERSATIONS' | 'PLATFORM_DASHBOARD' | 'PLATFORM_SALONS';
 
@@ -39,6 +41,17 @@ function App() {
     city: '',
     businessType: 'Salon'
   });
+
+  // Client-side routing for public pages
+  const path = window.location.pathname;
+  if (path.startsWith('/book/')) {
+    const slug = path.split('/')[2];
+    return <PublicBookingPage salonSlug={slug} />;
+  }
+  if (path.startsWith('/portal/')) {
+    const slug = path.split('/')[2];
+    return <CustomerPortalPage salonSlug={slug} />;
+  }
 
   useEffect(() => {
     if (token) {

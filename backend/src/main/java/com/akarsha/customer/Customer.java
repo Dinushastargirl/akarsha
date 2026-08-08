@@ -25,6 +25,9 @@ public class Customer extends TenantAwareEntity {
     @Column
     private String email;
 
+    @Column(name = "password_hash")
+    private String passwordHash;
+
     @Column
     private LocalDate birthday;
 

@@ -11,4 +11,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
     // count() inherited from JpaRepository is automatically tenant-filtered by TenantAspect + Hibernate @Filter
     long countByCreatedAtBetween(java.time.Instant start, java.time.Instant end);
+    
+    java.util.List<Customer> findByPhone(String phone);
+    java.util.Optional<Customer> findByEmail(String email);
 }

@@ -29,6 +29,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     Page<Appointment> findByStaffId(Long staffId, Pageable pageable);
 
     Page<Appointment> findByCustomerId(Long customerId, Pageable pageable);
+    
+    List<Appointment> findByCustomerIdOrderByAppointmentDateDesc(Long customerId);
 
     Page<Appointment> findByStatus(AppointmentStatus status, Pageable pageable);
 
