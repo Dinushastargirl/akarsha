@@ -77,12 +77,12 @@ function App() {
     <div className="min-h-screen bg-neutral-50 flex flex-col justify-between py-10 px-6 sm:px-12 md:px-24 text-neutral-800 animate-subtle-fade">
       
       {/* Header */}
-      <header className="max-w-4xl w-full mx-auto flex items-center justify-between border-b border-neutral-200 pb-6">
-        <div className="flex items-center space-x-8">
+      <header className="max-w-6xl w-full mx-auto flex flex-wrap items-center justify-between gap-y-4 border-b border-neutral-200 pb-6">
+        <div className="flex items-center space-x-4 lg:space-x-8">
           <img src={akarshaLogoDark} alt="Akarsha" className="h-8 hidden sm:block" />
           <img src={akarshaMark} alt="Akarsha" className="h-8 sm:hidden bg-brand-800 rounded-md p-1" />
           {token && ['DASHBOARD', 'CUSTOMERS', 'APPOINTMENTS', 'STAFF', 'SERVICES'].includes(screen) && (
-            <nav className="hidden sm:flex space-x-6 pl-4 border-l border-neutral-200">
+            <nav className="hidden sm:flex space-x-3 lg:space-x-6 pl-4 border-l border-neutral-200 overflow-x-auto">
               <button 
                 onClick={() => { setScreen('DASHBOARD'); setError(null); }}
                 className={`text-sm font-medium transition-colors py-1 ${screen === 'DASHBOARD' ? 'text-brand-800 border-b-2 border-brand-800' : 'text-neutral-500 hover:text-neutral-800'}`}
