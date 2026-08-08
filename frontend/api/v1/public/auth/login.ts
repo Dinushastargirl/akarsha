@@ -1,6 +1,12 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { PrismaClient } from '@prisma/client';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+const prisma = new PrismaClient();
+const JWT_SECRET = process.env.JWT_SECRET || 'default-akarsha-super-secure-secret-key-that-is-at-least-256-bits-long';
+
+export default async function handler(req: VercelRequest, res: VercelResponse) {
     // Handle CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -14,21 +20,47 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
     if (req.method === 'POST') {
         const { email, password } = req.body || {};
         
-        // Mock successful login for the owner
-        if (email === 'owner@alpha.com' && password === 'Owner123!') {
-            // Generate a fake JWT token
-            const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJvd25lckBhbHBoYS5jb20iLCJyb2xlIjoiU0FMT05fT1dORVIiLCJ0ZW5hbnRJZCI6ImFscGhhIiwiaWF0IjoxNzEyMTIzNDU2LCJleHAiOjE3MTIxMjcwNTZ9.THIS_IS_A_MOCK_TOKEN_FOR_VERCEL";
-            
-            res.status(200).json({
-                token: token,
-                tenantId: "alpha",
-                role: "SALON_OWNER"
-            });
+        if (!email || !password) {
+            res.status(400).json({ message: "Email and password are required" });
             return;
         }
 
-        res.status(401).json({ message: "Invalid credentials" });
-        return;
+        try {
+            // Find user in database
+            const user = await prisma.user.findFirst({
+                where: { email: email }
+            });
+
+            if (!user) {
+                res.status(401).json({ message: "Invalid credentials" });
+                return;
+            }
+
+            // Verify password
+            const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+            if (!isPasswordValid) {
+                res.status(401).json({ message: "Invalid credentials" });
+                return;
+            }
+
+            // Generate JWT token
+            const token = jwt.sign(
+                { sub: user.email, role: user.role, tenantId: user.tenantId },
+                JWT_SECRET,
+                { expiresIn: '24h' }
+            );
+            
+            res.status(200).json({
+                token: token,
+                tenantId: user.tenantId,
+                role: user.role
+            });
+            return;
+        } catch (error) {
+            console.error("Login error:", error);
+            res.status(500).json({ message: "Internal server error" });
+            return;
+        }
     }
 
     res.status(405).json({ message: "Method not allowed" });

@@ -1,0 +1,32 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Salon {
+  id        BigInt   @id @default(autoincrement())
+  name      String   @db.VarChar(255)
+  subdomain String   @unique @db.VarChar(100)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt DateTime @default(now()) @map("updated_at") @db.Timestamptz
+
+  @@map("salons")
+}
+
+model User {
+  id           BigInt   @id @default(autoincrement())
+  tenantId     String   @map("tenant_id") @db.VarChar(100)
+  username     String   @db.VarChar(150)
+  email        String   @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  role         String   @db.VarChar(50)
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @default(now()) @map("updated_at") @db.Timestamptz
+
+  @@unique([tenantId, email], map: "uq_users_tenant_email")
+  @@index([tenantId], map: "idx_users_tenant")
+  @@map("users")
+}
