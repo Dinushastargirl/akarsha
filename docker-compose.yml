@@ -13,5 +13,21 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: akarsha-backend
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/akarsha
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - JWT_SECRET=local-development-secret-key-that-is-at-least-256-bits-long
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - postgres
+
 volumes:
   pgdata:
