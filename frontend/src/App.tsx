@@ -118,7 +118,7 @@ function App() {
             </nav>
           )}
 
-          {token && ['DASHBOARD', 'CUSTOMERS', 'APPOINTMENTS', 'STAFF', 'SERVICES'].includes(screen) && (
+          {token && ['DASHBOARD', 'CUSTOMERS', 'APPOINTMENTS', 'STAFF', 'SERVICES', 'CONVERSATIONS'].includes(screen) && (
             <nav className="hidden sm:flex space-x-3 lg:space-x-6 pl-4 border-l border-neutral-200 overflow-x-auto">
               <button 
                 onClick={() => { setScreen('DASHBOARD'); setError(null); }}
@@ -358,7 +358,7 @@ function App() {
           <a href="#" className="hover:text-neutral-600 transition-colors">Documentation</a>
         </div>
       </footer>
-      <ChatWidget />
+      {salon?.subdomain && <ChatWidget salonSlug={salon.subdomain} />}
     </div>
   );
 }

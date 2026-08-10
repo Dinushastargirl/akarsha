@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Store, Clock, MapPin, Loader2, Info } from 'lucide-react';
 import { settingsService } from '../features/settings/settingsService';
+import { AiSettingsTab } from '../features/settings/AiSettingsTab';
+import { WhatsAppSettingsTab } from '../features/settings/WhatsAppSettingsTab';
 import type { SalonData } from '../types';
 
 interface SettingsPageProps {
@@ -24,6 +26,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onError, onSuccess }
     openingTime: '',
     closingTime: ''
   });
+  const [activeTab, setActiveTab] = useState<'general' | 'ai' | 'whatsapp'>('general');
 
   useEffect(() => {
     loadSettings();
@@ -92,7 +95,29 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onError, onSuccess }
         <p className="text-neutral-500 mt-2">{t('settingsSubtitle')}</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-12">
+      <div className="flex space-x-4 mb-6 border-b border-brand-100">
+        <button 
+          onClick={() => setActiveTab('general')}
+          className={`pb-3 px-2 font-medium text-sm transition-colors ${activeTab === 'general' ? 'border-b-2 border-brand-800 text-brand-900' : 'text-brand-500 hover:text-brand-700'}`}
+        >
+          General Information
+        </button>
+        <button 
+          onClick={() => setActiveTab('ai')}
+          className={`pb-3 px-2 font-medium text-sm transition-colors ${activeTab === 'ai' ? 'border-b-2 border-brand-800 text-brand-900' : 'text-brand-500 hover:text-brand-700'}`}
+        >
+          AI Receptionist
+        </button>
+        <button 
+          onClick={() => setActiveTab('whatsapp')}
+          className={`pb-3 px-2 font-medium text-sm transition-colors ${activeTab === 'whatsapp' ? 'border-b-2 border-brand-800 text-brand-900' : 'text-brand-500 hover:text-brand-700'}`}
+        >
+          WhatsApp Integration
+        </button>
+      </div>
+
+      {activeTab === 'general' ? (
+        <form onSubmit={handleSubmit} className="space-y-12">
         
         {/* Basic Information */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -240,7 +265,12 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onError, onSuccess }
           </button>
         </div>
 
-      </form>
+        </form>
+      ) : activeTab === 'ai' ? (
+        <AiSettingsTab subdomain={formData.subdomain} />
+      ) : (
+        <WhatsAppSettingsTab onError={onError} onSuccess={onSuccess} />
+      )}
     </div>
   );
 };

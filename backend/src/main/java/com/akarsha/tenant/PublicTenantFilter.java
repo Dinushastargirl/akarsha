@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class PublicTenantFilter extends OncePerRequestFilter {
 
     private final SalonRepository salonRepository;
-    private static final Pattern PUBLIC_BOOKING_PATTERN = Pattern.compile("^/api/v1/public/booking/([^/]+)(/.*)?$");
+    private static final Pattern PUBLIC_ROUTE_PATTERN = Pattern.compile("^/api/v1/public/(?:booking|chat)/([^/]+)(/.*)?$");
 
     public PublicTenantFilter(SalonRepository salonRepository) {
         this.salonRepository = salonRepository;
@@ -29,7 +29,7 @@ public class PublicTenantFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
 
         String path = request.getRequestURI();
-        Matcher matcher = PUBLIC_BOOKING_PATTERN.matcher(path);
+        Matcher matcher = PUBLIC_ROUTE_PATTERN.matcher(path);
 
         if (matcher.matches()) {
             String salonSlug = matcher.group(1);

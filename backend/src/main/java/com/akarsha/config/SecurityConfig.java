@@ -64,6 +64,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/v1/public/**").permitAll()
+                .requestMatchers("/public/**").permitAll()
                 .requestMatchers("/chat/**").permitAll()
                 .requestMatchers("/whatsapp/**").permitAll()
                 .anyRequest().authenticated()

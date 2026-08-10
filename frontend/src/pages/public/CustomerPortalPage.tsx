@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Calendar, Clock, User, XCircle, LogOut } from 'lucide-react';
+import { ChatWidget } from '../../features/chat/ChatWidget';
 import { apiFetch } from '../../services/api';
 import type { SalonData } from '../../types';
 
@@ -196,6 +197,7 @@ export function CustomerPortalPage({ salonSlug }: CustomerPortalPageProps) {
           )}
         </div>
       </main>
+      <ChatWidget salonSlug={salonSlug} />
     </div>
   );
 }
